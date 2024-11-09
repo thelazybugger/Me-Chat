@@ -50,6 +50,6 @@ function scrollToBottom() {
     messageArea.scrollTop = messageArea.scrollHeight
 }
 
-const socket = io({
+ socket = io({
   transports: ["polling"] // Enforce HTTP polling as a transport
 });
