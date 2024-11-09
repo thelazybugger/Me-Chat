@@ -6,7 +6,7 @@ const http = require('http').createServer(app)
 app.use(express.static('public')); 
 
 
-const PORT = process.env.PORT || https://me-chat-khaki.vercel.app/
+const PORT = process.env.PORT || 8000
 
 http.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`)
