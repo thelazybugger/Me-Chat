@@ -24,3 +24,5 @@ io.on('connection', (socket) => {
         socket.broadcast.emit('message', msg)
     })
 });
+
+setTimeout(disconnectSocket, 300000);
