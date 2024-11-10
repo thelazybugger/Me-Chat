@@ -25,4 +25,4 @@ io.on('connection', (socket) => {
     })
 });
 
-setTimeout(disconnectSocket, 300000);
+
