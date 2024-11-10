@@ -30,4 +30,7 @@ io.on('connection', (socket) => {
 
 })
 
-
+const socket = io({
+  transports: ["polling"],        // Enforce polling to avoid WebSocket limitations
+  pollingInterval: 18000000       // 300 minutes in milliseconds
+});
