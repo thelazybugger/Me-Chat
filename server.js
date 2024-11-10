@@ -26,11 +26,9 @@ io.on('connection', (socket) => {
     console.log('Connected...')
     socket.on('message', (msg) => {
         socket.broadcast.emit('message', msg)
+
+          transports: ["polling"],        // Enforce polling to avoid WebSocket limitations
+  pollingInterval: 18000000       // 300 minutes in milliseconds
     })
 
 })
-
-const socket = io({
-  transports: ["polling"],        // Enforce polling to avoid WebSocket limitations
-  pollingInterval: 18000000       // 300 minutes in milliseconds
-});
