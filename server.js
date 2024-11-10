@@ -20,15 +20,33 @@ app.get('/', (req, res) => {
 })
 
 //Socket 
-const io = require('socket.io')(http)
+let socket;
 
-io.on('connection', (socket) => {
-    console.log('Connected...')
-    socket.on('message', (msg) => {
-        socket.broadcast.emit('message', msg)
+function connectSocket() {
+  socket = io({
+    transports: ["polling"],
+    pollingInterval: 60000 // Polling every minute during active periods
+  });
+  
+  // Set up socket event listeners here, e.g., for receiving messages
+  socket.on("message", (msg) => {
+    console.log("New message:", msg);
+  });
+}
 
-          transports: ["polling"],        // Enforce polling to avoid WebSocket limitations
-  pollingInterval: 18000000       // 300 minutes in milliseconds
-    })
+function disconnectSocket() {
+  if (socket) {
+    socket.disconnect();
+    socket = null;
+  }
+}
 
-})
+// Connect socket on user activity (e.g., sending a message)
+document.getElementById("sendMessageButton").addEventListener("click", () => {
+  if (!socket) {
+    connectSocket();
+  }
+});
+
+// Optionally disconnect socket after a timeout period of inactivity
+setTimeout(disconnectSocket, 300000); // 5 minutes of inactivity
